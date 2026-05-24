@@ -11,6 +11,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import QRCode from "qrcode";
 import { toast } from "sonner";
 import { QrCode, Timer, RefreshCw, Download } from "lucide-react";
 
@@ -64,7 +65,6 @@ export function QrCodeDialog({ courseId }: QrCodeDialogProps) {
         return;
       }
 
-      const QRCode = (await import("qrcode")).default;
       const url = await QRCode.toDataURL(token, {
         width: 400,
         margin: 2,
@@ -103,7 +103,6 @@ export function QrCodeDialog({ courseId }: QrCodeDialogProps) {
       .single();
 
     if (session) {
-      const QRCode = (await import("qrcode")).default;
       const url = await QRCode.toDataURL(session.qr_token, {
         width: 400,
         margin: 2,
