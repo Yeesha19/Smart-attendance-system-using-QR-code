@@ -27,6 +27,7 @@ Package manager is **bun** (lockfile: `package-lock.json`). (prettier CLI is ins
 - `supabase/migrations/001_schema.sql` — already applied (RLS with JWT-based role + SECURITY DEFINER helper to break cycles)
 - `supabase/migrations/002_rpc_get_email.sql` — `get_email_by_matric_no` RPC
 - `supabase/migrations/003_seed_data.sql` — test accounts + course + sessions + attendance
+- `supabase/migrations/004_seed_demo_data.sql` — replaces STAT 321 with CIT415/410/484/474, 25 students, 10 sessions/course, 548+ attendance records
 - **QR**: `qrcode` (generation, client-side with `toDataURL`) + `html5-qrcode` (scanning) — both installed
 
 ## Layout & conventions
