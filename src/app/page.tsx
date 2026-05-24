@@ -1,12 +1,27 @@
-import { Button } from "@/components/ui/button";
+import { redirect } from "next/navigation";
+import { createClient } from "@/lib/supabase/server";
 
-export default function Home() {
-  return (
-    <div className="flex items-center justify-center flex-1">
-      <h1 className="text-2xl font-bold">
-        <Button>Apples</Button>
-        QR Attendance
-      </h1>
-    </div>
-  );
+export default async function Home() {
+  const supabase = await createClient();
+  const { data: user } = await supabase.auth.getUser();
+
+  if (!user.user) {
+    redirect("/login");
+  }
+
+  const { data: profile } = await supabase
+    .from("users")
+    .select("role")
+    .eq("id", user.user.id)
+    .single();
+
+  if (profile?.role === "lecturer") {
+    redirect("/lecturer/dashboard");
+  }
+
+  if (profile?.role === "student") {
+    redirect("/student/dashboard");
+  }
+
+  redirect("/login");
 }
